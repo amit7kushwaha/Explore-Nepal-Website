@@ -1,2 +1,4 @@
 Version 1.0 of the platform is designe das an informational and  inquiry-based website 
 (excluding complex online payment gateways or third party paid APIs for v1.0),
+meaning development and hosting costs are mininmal or free using student/
+open-source tires (e.g., local SQLite developpment and free-tier hosting options)
