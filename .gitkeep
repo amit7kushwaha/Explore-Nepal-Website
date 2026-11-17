@@ -1,118 +1,121 @@
-I'll start by reading your SRS and the other documents, then look at your repo screenshot.
-Your repo has the planning, analysis and design documents. It has no code, no `README.md` at the root, no `.gitignore`, and no dependency or environment files. The `Implementation` folder holds only `.gitkeep` and `explore_nepal`. Below is what to fix, what to decide, and what each person adds. I couldn't see inside the collapsed folders (`wireframes`, `Team-Members`, `Business Need` and so on).
+Mamata le 
 
-## 1. Fix before anyone codes
+README.md                               (how to run the project)
+.gitignore                              (Python/Django; must list .env, db.sqlite3, venv/, media/)
+.github/pull_request_template.md
+docs/decisions.md                       (the team's final choices, see below)
+planning/Project-Standards/coding-standards.md
+planning/Project-Standards/git-workflow.md
+planning/Risk-Assessment/risk-register.md
+planning/Staffing-Plan/Team-Members/Mamata-Bogati.md
+Class Activities/ Use-Case-Diagram.pptx, System-Architecture.pptx, Context-Model.pptx
+Documentation/Deployment.md             (at the end)
 
-| Problem in the screenshot | Fix |
-|---|---|
-| `readmme.md` is inside `Analysis` | Create a real `README.md` at the **repo root**. The SRS (6.4) requires setup, environment variables, DB init, tests and deployment steps. |
-| `Feasibility-Anaysis`, `Technical Feasiblity`, `View_Iteneraries_Design.md`, `contex.jpg` | Fix the spelling with `git mv`. |
-| `Operational& Organizational …`, `Project Lead \ Requestor` | Remove `&`, `\` and spaces, for example `Project-Lead-Requestor`. A backslash in a name breaks on some systems. |
-| No `.gitignore` | Add one for Python/Django. It must exclude `.env`, `db.sqlite3`, `venv/`, `__pycache__/` and `media/`. SRS NFR-12 says secrets must not be committed. |
-| `Project-Standards` and `Risk-Assessment` hold only `.gitkeep` | Fill them (see Mamata below). |
 
-## 2. Decide as a team before coding
+First code task: push the empty Django project to main so the others can start from it.
+Implementation/explore_nepal/manage.py
+Implementation/explore_nepal/requirements.txt
+Implementation/explore_nepal/.env.example      (placeholders only, no real passwords)
+Implementation/explore_nepal/config/           (settings.py, urls.py)
 
-Your documents contradict each other in four places. Write the answers in `docs/decisions.md`. The SRS lists "Appendix C: Project Decisions" in its contents, but I couldn't find that appendix in the document.
 
-1. **Payment, hotel and transport.** `Use Case Diagram.pptx` and the context model include Transportation, Hotel and Payment systems and "Process Payment". The SRS (1.4) says v1.0 has no bookings or payments. I recommend following the SRS and marking those parts "future work" in the diagrams.
-2. **Visitor registration.** The SRS context diagram shows visitors registering, but the SRS assumes core browsing needs no accounts. I recommend no visitor accounts. Only admins log in.
-3. **Framework.** The architecture slide says Django, but the SRS says the framework is still to be chosen. I recommend Django and SQLite for development.
-4. **Email and map.** Both are optional in the SRS. I recommend skipping them in v1, or using Django's console email backend.
 
-## 3. Target repo structure
 
-```
-explore-nepal/
-├── README.md                     ← NEW
-├── .gitignore                    ← NEW
-├── .github/                      ← NEW (ci.yml, PR template)
-├── docs/                         ← NEW (decisions.md, privacy-notice.md)
-├── Analysis/   (one *_Analysis.md per use case)
-├── Design/
-│   ├── wireframes/
-│   ├── database-design.md (ERD) ← NEW
-│   ├── ui-style-guide.md         ← NEW
-│   └── *_Design.md per use case  ← NEW
-├── Implementation/explore_nepal/
-│   ├── manage.py, requirements.txt, .env.example   ← NEW
-│   ├── config/        (settings, urls)
-│   ├── destinations/  itineraries/  inquiries/  pages/
-│   ├── templates/  static/
-├── Testing/                      ← NEW (test-plan.md, test-cases.xlsx, test-report.md)
-├── Documentation/                ← NEW (Admin-Guide.md, Visitor-FAQ.md, Deployment.md)
-└── planning/ (existing)
-```
 
-Each Django app also gets `models.py`, `views.py`, `urls.py`, `admin.py`, `forms.py`, `templates/` and `tests/`.
 
-## 4. What each person adds
 
-I split the work by module so everyone has code, design documents and tests. This is my suggestion, so swap tasks if you prefer.
+Kalpana le
 
-### Bogati Mamata: team lead, repo and setup
-- **Repo files:** `README.md`, `.gitignore`, `.env.example`, `requirements.txt`.
-- **Django skeleton:** create it in `Implementation/explore_nepal/` and push it to `main` first. Everyone else needs it.
-- **GitHub setup:** `.github/workflows/ci.yml` to run the tests, a PR template, and a rule that `main` only changes through reviewed PRs.
-- **Planning docs:**
-  - `planning/Project-Standards/` gets `coding-standards.md`, `git-workflow.md` and `definition-of-done.md`.
-  - `planning/Risk-Assessment/` gets `risk-register.md`.
-  - `docs/decisions.md` records the decisions from section 2.
-- **Later:** `Documentation/Deployment.md` and the final `v1.0` release tag.
+Analysis/Browse_Destinations_Analysis.md
+Analysis/Search_Filter_Analysis.md
+Analysis/View_Destination_Details_Analysis.md
+Analysis/Manage_Destinations_Analysis.md
+Design/Browse_Destinations_Design.md
+Design/Search_Filter_Design.md
+Design/View_Destination_Details_Design.md
+Design/Manage_Destinations_Design.md
+Design/database-design.md                      (ERD for the whole system; ask the others for input)
+Design/wireframes/Destinations-List.png, Destination-Details.png
+planning/Staffing-Plan/Team-Members/Kalpana-Bhusal.md
 
-### Bhusal Kalpana: Destinations (FR-01 to 10, 26, 30)
-- **Code (`destinations/`):**
-  - A `Destination` model with name, slug, region, category/activity, description, highlights, practical info, image, status (published/unpublished/archived), timestamps and created-by.
-  - List, detail, search and filter views.
-  - Pagination and an empty-state message.
-  - Admin actions to publish, unpublish and archive.
-- **Data:** `fixtures/sample_destinations.json` with 8–10 real places such as Kathmandu, Pokhara, Chitwan, Lumbini and Everest region. Your content owner must review it.
-- **Docs:** `Browse_Destinations`, `Search_Filter` and `View_Destination_Details`, each with an `_Analysis.md` and a `_Design.md`. Also `Design/database-design.md` (the ERD for the whole system, with input from everyone).
-- **Tests:** only published items show, empty and malformed search input, filters combine correctly.
+Code goes in Implementation/explore_nepal/destinations/:
+models.py (the Destination table)
+views.py
+urls.py
+admin.py
+forms.py
+tests.py
+fixtures/sample_destinations.json (8–10 real places)
 
-### Tamang Sujina: Inquiries (FR-14 to 20, 31 to 34)
-- **Code (`inquiries/`):**
-  - An `Inquiry` model with reference ID, name, email, optional phone, optional destination, message, status (New, In Progress, Responded, Closed) and created-at.
-  - A form with client and server validation.
-  - Anti-spam (a honeypot field and rate limit).
-  - A confirmation page that says "this is not a confirmed booking".
-  - An admin list filterable by date, status and reference.
-  - Optional email notification.
-- **Docs:** `Submit_Inquiry` and `Manage_Inquiries` analysis and design files, the submit-inquiry sequence diagram, and `docs/privacy-notice.md` with a data-retention rule (NFR-13 and 15).
-- **Tests:** invalid submissions are rejected and not saved, status changes work, and the public can't see inquiries.
 
-### Bhatta Pabitra: UI, templates and static pages
-- **Code:** `templates/base.html` (navbar and footer), `static/css` and `static/js`, and the `pages/` app with Home (featured destinations), About, Contact, FAQ and Privacy pages. Add custom 404 and 500 pages (NFR-20).
-- **Behaviour:** mobile-responsive layout, accessibility (labels, alt text, keyboard use), and a submit button that disables itself on click (NFR-04).
-- **Design docs:** finalize `Design/wireframes/` for every public and admin page, and write `Design/ui-style-guide.md` (colours, fonts).
-- **Docs:** `Documentation/Visitor-FAQ.md` and `Documentation/Admin-Guide.md` (SRS 2.6).
-- **Tests:** a manual checklist on desktop and mobile browsers, plus a Lighthouse accessibility check.
 
-### Mahato Amit Kumar: Itineraries, admin login and security, QA
-- **Itineraries (`itineraries/`):**
-  - Title, duration, route/stops, description, practical notes, linked destinations and status.
-  - List and detail pages with an "informational only, no guaranteed price or availability" label (FR-13).
-  - Related itineraries on destination pages, coordinated with Kalpana.
-  - Update the existing `View_Itineraries` analysis and design files, and add `Manage_Itineraries`.
-- **Admin login and security:**
-  - Use Django's built-in auth with login and logout.
-  - No public admin registration.
-  - Protected routes.
-  - In production settings: HTTPS redirect, secure cookies, CSRF protection and admin access logging (FR-21 to 25, NFR-08 to 14).
-  - `Admin_Login` analysis and design files.
-- **QA:** `Testing/test-plan.md`, `test-cases.xlsx` (every FR/NFR mapped to a test case) and `test-report.md`.
 
-### Everyone
-- Work on your own branch, for example `feature/destinations`, and open a PR for Mamata or another member to review. Don't push straight to `main`.
-- Write tests for your own module (NFR-21).
-- Never commit passwords, keys, `.env` or real inquiry data.
-- Keep your `_Analysis.md` and `_Design.md` files in the same pattern as `View_Itineraries_*`.
 
-## 5. Order of work
+sujina le
+Analysis/Submit_Inquiry_Analysis.md
+Analysis/Manage_Inquiries_Analysis.md
+Design/Submit_Inquiry_Design.md
+Design/Manage_Inquiries_Design.md
+Design/wireframes/Inquiry-Form.png, Admin-Inquiry-List.png
+docs/privacy-notice.md                         (what data you collect, why, how long you keep it)
+planning/Staffing-Plan/Team-Members/Sujina-Tamang.md
 
-1. **Day 1:** Mamata fixes the names, adds the README, `.gitignore` and the decisions file, then pushes the Django skeleton.
-2. **Days 2–3:** everyone pulls `main`, creates their app and branch, and finishes their `_Design.md` files and the ERD.
-3. **Week 1–2:** build models, then views and templates (Pabitra's `base.html` comes first), then admin.
-4. **Week 3:** Amit adds security and permissions, and everyone adds tests. Merge, run the test plan, write the guides, and tag `v1.0`.
+Code goes in Implementation/explore_nepal/inquiries/:
+models.py (the Inquiry table with a status field)
+forms.py (validation and anti-spam)
+views.py
+urls.py
+admin.py
+tests.py
 
-I can turn this into a spreadsheet task tracker or a set of GitHub issue texts, one per person, if you'd like that. I can also write the starter `README.md` and `.gitignore`.
+
+
+
+
+
+
+
+pabitra le
+
+Analysis/View_Contact_Info_Analysis.md
+Design/View_Contact_Info_Design.md
+Design/ui-style-guide.md                       (colours, fonts, button style)
+Design/wireframes/Home.png, About-Contact-FAQ.png, Error-404.png
+Documentation/Visitor-FAQ.md
+Documentation/Admin-Guide.md
+planning/Staffing-Plan/Team-Members/Pabitra-Bhatta.md
+
+
+Code goes in these places:
+Implementation/explore_nepal/templates/base.html      (menu and footer for every page)
+Implementation/explore_nepal/templates/404.html, 500.html
+Implementation/explore_nepal/static/css/style.css
+Implementation/explore_nepal/static/js/main.js
+Implementation/explore_nepal/pages/                   (Home, About, Contact, FAQ, Privacy)
+
+
+
+
+
+
+AMit le
+
+Analysis/View_Itineraries_Analysis.md          (already exists; update it)
+Analysis/Manage_Itineraries_Analysis.md
+Analysis/Admin_Login_Analysis.md
+Design/View_Itineraries_Design.md              (the existing file is spelled Iteneraries; fix it)
+Design/Manage_Itineraries_Design.md
+Design/Admin_Login_Design.md
+Design/wireframes/Itineraries.png, Admin-Login.png, Admin-Dashboard.png
+Testing/test-plan.md
+Testing/test-cases.xlsx                        (one row per FR and NFR from the SRS)
+Testing/test-report.md                         (at the end)
+planning/Staffing-Plan/Team-Members/Amit-Mahato.md
+
+Code goes in Implementation/explore_nepal/itineraries/:
+models.py
+views.py
+urls.py
+admin.py
+tests.py
+For login and security, use Django's built-in login. Put the security settings in config/settings.py. Do not allow public admin sign-up.
