@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ destination.name }}</title>
+</head>
+<body>
+    <h1>{{ destination.name }}</h1>
+
+    {% if destination.image_url %}
+        <img src="{{ destination.image_url }}"
+             alt="{{ destination.name }}"
+             width="400">
+    {% endif %}
+
+    <h3>Location</h3>
+    <p>{{ destination.location }}</p>
+
+    <h3>Description</h3>
+    <p>{{ destination.description }}</p>
+
+    <h3>Best Time to Visit</h3>
+    <p>{{ destination.best_time_to_visit }}</p>
+
+    <h3>Travel Information</h3>
+    <p>{{ destination.travel_information }}</p>
+
+    <a href="{% url 'destination_list' %}">Back to Destinations</a>
+</body>
+</html>
