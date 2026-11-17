@@ -1,5 +1,3 @@
-# REQ-4: View Itineraries
-
 1. Purpose
 Allow website visitors to browse and read suggested travel itineraries in Nepal, including trip highlights and regional details.
 
