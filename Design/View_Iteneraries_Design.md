@@ -1,5 +1,3 @@
-# REQ-4: View Itineraries — Design
-
 ## 1. Page Layout (UI Design)
 - **Header:** Navigation bar with links (Home, Destinations, Itineraries, Transport & Accommodation, Inquiry).
 - **Itinerary List Section:** A grid of cards showing each Nepal trip with:
