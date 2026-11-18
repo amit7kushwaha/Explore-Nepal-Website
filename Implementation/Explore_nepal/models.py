@@ -59,7 +59,7 @@ class Itinerary(models.Model):
     @property
     def stops_list(self):
         """route_stops text -> clean list (one stop per line)."""
-        return [line.strip() for line in self.route_stops.splitlines() if line.strip()]
+        return [line.strip() for line in self.route_stops.splitlines() if line.strip()] 
 
     def missing_for_publish(self):
         """Names of required fields that are still empty (FR-28)."""
