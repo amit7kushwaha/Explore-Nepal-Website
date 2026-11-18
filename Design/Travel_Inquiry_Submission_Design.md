@@ -53,7 +53,7 @@ CREATE TABLE travel_inquiries (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
-Use code with caution.
+
 
 5. API Specification
 
@@ -82,7 +82,7 @@ json
   "message": "Looking for a private guide and porter for Annapurna Base Camp.",
   "captcha_token": "0x4AAAAAA..."
 }
-Use code with caution.
+
 
 Success Response (201 Created)
 
@@ -95,19 +95,7 @@ json
     "estimated_response_hours": 24
   }
 }
-Use code with caution.
 
-Error Response (422 Unprocessable Entity)
-
-json
-{
-  "status": "error",
-  "message": "Validation failed",
-  "errors": {
-    "start_date": "Start date must be at least 3 days in the future."
-  }
-}
-Use code with caution.
 
 6. Notifications & Integrations
 
