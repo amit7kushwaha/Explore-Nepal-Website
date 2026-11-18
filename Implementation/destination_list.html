@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Explore Nepal</title>
+</head>
+<body>
+    <h1>Explore Nepal</h1>
+    <h2>Discover Beautiful Places of Nepal</h2>
+
+    {% for place in destinations %}
+        <div>
+            <h2>{{ place.name }}</h2>
+            <p>{{ place.location }}</p>
+            <p>{{ place.description|truncatewords:25 }}</p>
+            <a href="{% url 'destination_detail' place.id %}">
+                View Details
+            </a>
+        </div>
+    {% empty %}
+        <p>No destinations available.</p>
+    {% endfor %}
+</body>
+</html>
