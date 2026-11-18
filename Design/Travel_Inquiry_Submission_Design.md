@@ -63,9 +63,6 @@ Submit Travel Inquiry
 • Endpoint: POST /api/v1/inquiries
 • Rate Limiting: 5 requests per IP per hour (plus CAPTCHA/Turnstile verification to prevent spam).
 
-Request Payload
-
-json
 {
   "full_name": "Pabitra Bhatta",
   "email": "pabibhatt12@gmail.com",
@@ -84,9 +81,6 @@ json
 }
 
 
-Success Response (201 Created)
-
-json
 {
   "status": "success",
   "data": {
