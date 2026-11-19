@@ -1,10 +1,10 @@
- Explore Nepal Travel & Tourism Website
+Explore Nepal Travel & Tourism Website
 
 Pabitra's Requirement Analysis — REQ-3 and REQ-10
 
 1. Introduction
 
-The Explore Nepal Travel & Tourism Website is designed to provide information about tourist destinations in Nepal. It helps visitors explore destinations, view travel information and suggested itineraries, and submit travel inquiries.
+The Explore Nepal Travel & Tourism Website is designed to provide information about tourist destinations in Nepal. It helps visitors explore destinations, view destination details and travel information, and submit travel inquiries.
 
 The website is developed using Python and Django.
 
@@ -21,7 +21,7 @@ This document focuses on:
 
 3.1 Description
 
-The system allows visitors to select a tourist destination in Nepal and view its available information, including destination details, travel guidance, and suggested itineraries.
+The system allows visitors to select a tourist destination in Nepal and view its available information, including destination details, regional information, highlights, and travel advisories.
 
 3.2 Destination Details
 
@@ -32,74 +32,52 @@ Destination details may include:
 - Description of the destination.
 - Local attractions and highlights.
 - Destination images.
-- Available practical information.
+- Available regional information.
 
 3.3 Travel Information
 
-Travel information helps visitors understand the available travel guidance, such as:
+Travel information helps visitors understand useful guidance about selected destinations, such as:
 
-- Transportation information.
-- Accommodation information, if available.
-- Travel guidance and practical notes.
+- Travel advisories.
+- Practical travel notes.
+- Important visitor information.
 - Safety information, if provided.
-- Suggested travel plans and itineraries.
+- Other relevant destination-related guidance.
 
-3.4 Itinerary Information
-
-Visitors can view suggested itineraries or travel guides when available.
-
-An itinerary may contain:
-
-- Itinerary title.
-- Duration.
-- Route or destinations.
-- Suggested activities.
-- Description and practical notes.
-
-Itineraries are informational and do not guarantee booking availability or prices.
-
-3.5 Actor
+3.4 Actor
 
 Visitor
 
-3.6 Input
+3.5 Input
 
 - Visitor selects a destination.
-- Visitor requests destination or itinerary information.
+- Visitor requests destination details or travel information.
 
-3.7 Process
+3.6 Process
 
 1. Visitor opens the destination section.
 2. System displays available destinations.
 3. Visitor selects a destination.
 4. System retrieves the selected destination information.
-5. System displays destination details and available travel information.
-6. Visitor can view related itinerary information when available.
+5. System displays destination details, regional information, and highlights.
+6. System displays available travel advisories and practical information.
 
-3.8 Output
+3.7 Output
 
-The visitor can view destination details, travel guidance, and available suggested itineraries.
+The visitor can view destination details, regional information, highlights, and available travel advisories.
 
-3.9 Data Requirements
+3.8 Data Requirements
 
 Destination information may include:
 
 - Destination ID
 - Destination Name
 - Location
+- Region
 - Description
-- Attractions
+- Attractions and Highlights
 - Image URL
-- Travel Information
-
-Itinerary information may include:
-
-- Itinerary ID
-- Title
-- Duration
-- Route or Stops
-- Description
-- Practical Notes
+- Travel Advisories
 
 The actual fields must match the Django models used in the project.
 
@@ -107,7 +85,7 @@ The actual fields must match the Django models used in the project.
 
 4.1 Description
 
-The system allows visitors to submit travel inquiries through the website. Administrators can view submitted inquiries and manage their status.
+The system allows visitors to submit travel inquiries through the website. Administrators can view submitted inquiries, review them, and manage their status.
 
 4.2 Main Functions
 
@@ -117,6 +95,7 @@ The system allows visitors to submit travel inquiries through the website. Admin
 - Store valid inquiry submissions.
 - Display confirmation after successful submission.
 - Allow administrators to view submitted inquiries.
+- Allow administrators to review inquiries.
 - Allow administrators to update inquiry status.
 
 4.3 Actors
@@ -175,8 +154,8 @@ REQ-3
 1. The system should display available tourist destinations.
 2. The system should show selected destination details.
 3. The system should display destination images when available.
-4. The system should provide available travel information.
-5. The system should display suggested itineraries when available.
+4. The system should provide available regional information and highlights.
+5. The system should display available travel advisories and practical information.
 
 REQ-10
 
@@ -185,7 +164,8 @@ REQ-10
 3. The system should store valid inquiries.
 4. The system should display a confirmation after successful submission.
 5. The system should allow administrators to view submitted inquiries.
-6. The system should allow administrators to update inquiry status.
+6. The system should allow administrators to review inquiries.
+7. The system should allow administrators to update inquiry status.
 
 6. Non-Functional Requirements
 
@@ -225,11 +205,11 @@ Main Flow:
 2. System displays available destinations.
 3. Visitor selects a destination.
 4. System displays destination information.
-5. Visitor views available travel information and related itineraries.
+5. Visitor views available regional information, highlights, and travel advisories.
 
 Alternative Flow:
 
-If destination information or related itinerary information is unavailable, the system should display the available information without showing missing content.
+If destination information or travel advisories are unavailable, the system should display the available information without showing missing content.
 
 REQ-10: Submit Travel Inquiry
 
@@ -280,9 +260,9 @@ Stores destination and inquiry information using the database configured for the
 
 Main Application Areas
 
-- Destination-related functionality.
-- Travel information and itinerary functionality, where implemented.
-- Inquiry submission and management functionality.
+- Destination details and travel information functionality.
+- Inquiry submission functionality.
+- Inquiry management functionality for administrators.
 
 9. Testing Considerations
 
@@ -292,8 +272,7 @@ Test ID| Requirement| Test Description| Expected Result
 TC-REQ3-01| REQ-3| Open destination listing| Available destinations are displayed
 TC-REQ3-02| REQ-3| Select a destination| Correct destination details are displayed
 TC-REQ3-03| REQ-3| View destination images| Available images are displayed
-TC-REQ3-04| REQ-3| Open travel information| Available travel information is displayed
-TC-REQ3-05| REQ-3| Open an available itinerary| Itinerary information is displayed
+TC-REQ3-04| REQ-3| Open travel information| Available travel information and advisories are displayed
 TC-REQ10-01| REQ-10| Submit a valid inquiry| Inquiry is stored and confirmation is displayed
 TC-REQ10-02| REQ-10| Submit an invalid inquiry| Validation message is displayed
 TC-REQ10-03| REQ-10| Administrator views inquiries| Submitted inquiries are displayed to the administrator
@@ -305,6 +284,6 @@ Test results should be marked Pass or Fail only after the corresponding tests ha
 
 This analysis describes the requirements assigned to Pabitra for the Explore Nepal Travel & Tourism Website.
 
-REQ-3 focuses on destination details, travel information, and suggested itineraries. REQ-10 focuses on visitor inquiry submission and administrator inquiry management.
+REQ-3 focuses on destination details, regional information, highlights, and travel advisories. REQ-10 focuses on visitor inquiry submission and administrator inquiry management.
 
 These requirements provide a basis for implementation, testing, and verification of the assigned project features.
