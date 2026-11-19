@@ -1,185 +1,88 @@
-Explore Nepal Travel & Tourism Website
+ Explore Nepal Travel & Tourism Website
 
-Requirement Analysis
+Pabitra's Requirement Analysis — REQ-3 and REQ-10
 
 1. Introduction
 
-The Explore Nepal Travel & Tourism Website is designed to provide information about tourist destinations in Nepal. The system helps visitors explore destinations, view travel information, and send inquiries through the website.
+The Explore Nepal Travel & Tourism Website is designed to provide information about tourist destinations in Nepal. It helps visitors explore destinations, view travel information and suggested itineraries, and submit travel inquiries.
 
-The system is developed using Python and Django.
+The website is developed using Python and Django.
 
 2. Purpose of Analysis
 
-The purpose of this analysis is to understand the system requirements, identify user needs, and define the functions required for the website.
+The purpose of this analysis is to understand the requirements assigned to Pabitra, identify the system functions, and describe how the requirements are supported by the website.
 
-This document focuses on REQ-3 and REQ-10.
+This document focuses on:
+
+- REQ-3: View Destination Details & Travel Information
+- REQ-10: Inquiry Management
 
 3. REQ-3: View Destination Details & Travel Information
 
-Description
+3.1 Description
 
-The system allows visitors to view information about different tourist destinations in Nepal.
+The system allows visitors to select a tourist destination in Nepal and view its available information, including destination details, travel guidance, and suggested itineraries.
 
-Destination Details
+3.2 Destination Details
 
-Destination details include information about the selected place, such as:
+Destination details may include:
 
-- Local attractions and popular places.
-- Weather information.
-- Geography and location.
-- Local culture and traditions.
-- Destination descriptions and images.
+- Destination name.
+- Location and region.
+- Description of the destination.
+- Local attractions and highlights.
+- Destination images.
+- Available practical information.
 
-Travel Information
+3.3 Travel Information
 
-Travel information provides practical details to help visitors plan their trips, such as:
+Travel information helps visitors understand the available travel guidance, such as:
 
-- Transportation options.
-- Entry requirements and visa information.
-- Safety advisories.
-- Travel schedules and itinerary details.
+- Transportation information.
+- Accommodation information, if available.
+- Travel guidance and practical notes.
+- Safety information, if provided.
+- Suggested travel plans and itineraries.
 
-Main Functions
+3.4 Itinerary Information
 
-- Display available destination names.
-- Show destination locations and regions.
-- Display destination descriptions.
-- Show attractions and highlights.
-- Display destination images.
-- Provide available travel information.
+Visitors can view suggested itineraries or travel guides when available.
 
-Actor
+An itinerary may contain:
+
+- Itinerary title.
+- Duration.
+- Route or destinations.
+- Suggested activities.
+- Description and practical notes.
+
+Itineraries are informational and do not guarantee booking availability or prices.
+
+3.5 Actor
 
 Visitor
 
-Input
+3.6 Input
 
-- Destination selection.
-- Destination information requested by the visitor.
+- Visitor selects a destination.
+- Visitor requests destination or itinerary information.
 
-Process
+3.7 Process
 
 1. Visitor opens the destination section.
 2. System displays available destinations.
 3. Visitor selects a destination.
-4. System retrieves the destination information.
+4. System retrieves the selected destination information.
 5. System displays destination details and available travel information.
+6. Visitor can view related itinerary information when available.
 
-Output
+3.8 Output
 
-The visitor can view available details and travel information about the selected destination.
+The visitor can view destination details, travel guidance, and available suggested itineraries.
 
-4. REQ-10: Inquiry & Payment Management
+3.9 Data Requirements
 
-Description
-
-The system focuses on managing visitor inquiries and payment-related information according to the features included in the project.
-
-Inquiry Management
-
-Inquiry management allows visitors to submit questions, special requests, or support messages. Administrators can view, review, and manage submitted inquiries.
-
-Main functions:
-
-- Receive visitor inquiries.
-- Store inquiry information.
-- Allow administrators to view inquiries.
-- Review and respond to visitor inquiries.
-- Update inquiry status.
-
-Payment Management
-
-Payment management may include:
-
-- Viewing invoices.
-- Checking payment status.
-- Downloading payment receipts.
-- Managing pending payments.
-- Handling refunds, if supported by the system.
-
-Actors
-
-- Visitor
-- Administrator
-
-Input
-
-- Visitor inquiry details.
-- Payment-related information, if supported.
-
-Process
-
-1. Visitor submits an inquiry through the website.
-2. System receives and stores the inquiry.
-3. Administrator opens the inquiry management section.
-4. Administrator reviews the submitted inquiry.
-5. Administrator responds or updates the inquiry status.
-6. System stores the updated information.
-
-Output
-
-Visitor inquiries are stored and can be reviewed and managed by the administrator. Payment information is available only if the corresponding payment features are implemented.
-
-Scope Note
-
-The current requirement analysis should match the actual project implementation. If an online payment gateway is not included, payment transactions should be treated as outside the implemented scope or future work.
-
-5. Functional Requirements
-
-The system should:
-
-1. Display available tourist destinations.
-2. Show destination details and descriptions.
-3. Display destination images.
-4. Provide available travel information.
-5. Allow visitors to submit inquiries.
-6. Store visitor inquiry information.
-7. Allow administrators to view and review inquiries.
-8. Allow administrators to update inquiry status.
-9. Provide payment-related information only if supported by the project.
-
-6. Non-Functional Requirements
-
-Usability
-
-The website should be simple and easy to navigate.
-
-Performance
-
-The system should display destination and inquiry information within a reasonable time.
-
-Security
-
-Administrative functions should be accessible only to authorized administrators. User information should be protected.
-
-Reliability
-
-The system should store and retrieve information correctly.
-
-Maintainability
-
-The system should allow future updates to destination and inquiry information.
-
-7. System Users
-
-Visitor
-
-- Browse tourist destinations.
-- View destination details.
-- View available travel information.
-- Submit inquiries.
-
-Administrator
-
-- Manage destination information.
-- View visitor inquiries.
-- Review and respond to inquiries.
-- Update inquiry status.
-- Manage payment-related information if implemented.
-
-8. Data Analysis
-
-Destination Data
+Destination information may include:
 
 - Destination ID
 - Destination Name
@@ -189,7 +92,65 @@ Destination Data
 - Image URL
 - Travel Information
 
-Inquiry Data
+Itinerary information may include:
+
+- Itinerary ID
+- Title
+- Duration
+- Route or Stops
+- Description
+- Practical Notes
+
+The actual fields must match the Django models used in the project.
+
+4. REQ-10: Inquiry Management
+
+4.1 Description
+
+The system allows visitors to submit travel inquiries through the website. Administrators can view submitted inquiries and manage their status.
+
+4.2 Main Functions
+
+- Provide a travel inquiry form.
+- Receive visitor questions and requests.
+- Validate inquiry information.
+- Store valid inquiry submissions.
+- Display confirmation after successful submission.
+- Allow administrators to view submitted inquiries.
+- Allow administrators to update inquiry status.
+
+4.3 Actors
+
+- Visitor
+- Administrator
+
+4.4 Input
+
+- Visitor name and contact information, according to the form fields.
+- Inquiry subject, if provided.
+- Inquiry message.
+
+4.5 Process
+
+1. Visitor opens the inquiry form.
+2. Visitor enters the required information.
+3. System validates the submitted information.
+4. System stores valid inquiry details.
+5. System displays a submission confirmation.
+6. Administrator signs in and opens the inquiry management section.
+7. Administrator views and reviews submitted inquiries.
+8. Administrator updates the inquiry status when necessary.
+
+4.6 Output
+
+- Confirmation message after successful inquiry submission.
+- Stored inquiry information.
+- Inquiry list and details for authorized administrators.
+- Updated inquiry status.
+
+4.7 Data Requirements
+
+Inquiry information may include:
 
 - Inquiry ID
 - Visitor Name
@@ -199,20 +160,111 @@ Inquiry Data
 - Inquiry Status
 - Submission Date
 
-Payment Data (If Implemented)
+The actual fields must match the Django inquiry model.
 
-- Payment ID
-- Invoice Number
-- Amount
-- Payment Status
-- Payment Date
-- Receipt Information
+4.8 Scope Limitation
 
-These fields should be checked against the actual Django models before implementation.
+The approved project SRS describes the website as an informational website with an inquiry form. It does not include confirmed online payment processing or a payment gateway.
 
-9. System Architecture Analysis
+Therefore, payment transactions, invoices, refunds, and online payment management are not considered implemented features in this analysis.
 
-The system follows a layered architecture.
+5. Functional Requirements
+
+REQ-3
+
+1. The system should display available tourist destinations.
+2. The system should show selected destination details.
+3. The system should display destination images when available.
+4. The system should provide available travel information.
+5. The system should display suggested itineraries when available.
+
+REQ-10
+
+1. The system should provide an inquiry submission form.
+2. The system should validate required inquiry information.
+3. The system should store valid inquiries.
+4. The system should display a confirmation after successful submission.
+5. The system should allow administrators to view submitted inquiries.
+6. The system should allow administrators to update inquiry status.
+
+6. Non-Functional Requirements
+
+Usability
+
+The website should be simple and easy to navigate.
+
+Performance
+
+Destination and inquiry information should be displayed within a reasonable time.
+
+Security
+
+Administrative inquiry information should only be accessible to authorized administrators.
+
+Reliability
+
+The system should store and retrieve valid destination and inquiry information correctly.
+
+Compatibility
+
+The website should support commonly used desktop and mobile browsers.
+
+Maintainability
+
+The Django application should be organized so that destination and inquiry features can be maintained and updated.
+
+7. Use Case Analysis
+
+REQ-3: View Destination Details
+
+Actor: Visitor
+
+Main Flow:
+
+1. Visitor opens the destination page.
+2. System displays available destinations.
+3. Visitor selects a destination.
+4. System displays destination information.
+5. Visitor views available travel information and related itineraries.
+
+Alternative Flow:
+
+If destination information or related itinerary information is unavailable, the system should display the available information without showing missing content.
+
+REQ-10: Submit Travel Inquiry
+
+Actor: Visitor
+
+Main Flow:
+
+1. Visitor opens the inquiry form.
+2. Visitor enters the required information.
+3. Visitor submits the form.
+4. System validates the information.
+5. System stores the inquiry.
+6. System displays a confirmation message.
+
+Alternative Flow:
+
+If required information is missing or invalid, the system displays an appropriate validation message.
+
+REQ-10: Manage Inquiries
+
+Actor: Administrator
+
+Main Flow:
+
+1. Administrator signs in.
+2. Administrator opens the inquiry management section.
+3. System displays submitted inquiries.
+4. Administrator selects an inquiry.
+5. Administrator reviews the inquiry.
+6. Administrator updates its status.
+7. System saves the updated status.
+
+8. System Architecture Analysis
+
+The project uses Python and Django.
 
 Presentation Layer
 
@@ -220,15 +272,39 @@ Provides the website interface using HTML, CSS, and Django templates.
 
 Application Layer
 
-Uses Python and Django to process user requests and manage application logic.
+Uses Django views, URL routing, forms, and application logic to process destination requests and inquiry submissions.
 
 Database Layer
 
-Stores destination information, visitor inquiries, and payment-related information if implemented.
+Stores destination and inquiry information using the database configured for the Django project.
+
+Main Application Areas
+
+- Destination-related functionality.
+- Travel information and itinerary functionality, where implemented.
+- Inquiry submission and management functionality.
+
+9. Testing Considerations
+
+The following test cases should be used to verify the assigned requirements.
+
+Test ID| Requirement| Test Description| Expected Result
+TC-REQ3-01| REQ-3| Open destination listing| Available destinations are displayed
+TC-REQ3-02| REQ-3| Select a destination| Correct destination details are displayed
+TC-REQ3-03| REQ-3| View destination images| Available images are displayed
+TC-REQ3-04| REQ-3| Open travel information| Available travel information is displayed
+TC-REQ3-05| REQ-3| Open an available itinerary| Itinerary information is displayed
+TC-REQ10-01| REQ-10| Submit a valid inquiry| Inquiry is stored and confirmation is displayed
+TC-REQ10-02| REQ-10| Submit an invalid inquiry| Validation message is displayed
+TC-REQ10-03| REQ-10| Administrator views inquiries| Submitted inquiries are displayed to the administrator
+TC-REQ10-04| REQ-10| Administrator updates inquiry status| Updated status is saved
+
+Test results should be marked Pass or Fail only after the corresponding tests have actually been performed.
 
 10. Conclusion
 
-This requirement analysis identifies the main functions of the Explore Nepal Travel & Tourism Website. REQ-3 focuses on viewing destination details and travel information, while REQ-10 focuses on inquiry and payment management according to the implemented project features.
+This analysis describes the requirements assigned to Pabitra for the Explore Nepal Travel & Tourism Website.
 
-These requirements help guide the system design, development, and testing activities.Explore Nepal Travel & Tourism Website
+REQ-3 focuses on destination details, travel information, and suggested itineraries. REQ-10 focuses on visitor inquiry submission and administrator inquiry management.
 
+These requirements provide a basis for implementation, testing, and verification of the assigned project features.
