@@ -1,4 +1,4 @@
-from django.db import models
+from .models import Destination
 
 class Destination(models.Model):
     name = models.CharField(max_length=200)
@@ -9,4 +9,5 @@ class Destination(models.Model):
     image_url = models.URLField(blank=True)
 
     def __str__(self):
+
         return self.name
