@@ -15,3 +15,16 @@ class ItineraryListView(ListView):
         return Itinerary.objects.published()
 
 
+class ItineraryDetailView(DetailView):
+    """FR-12: one itinerary. Draft/unpublished/archived -> 404 (FR-30)."""
+    model = Itinerary
+    template_name = "itineraries/itinerary_detail.html"
+    context_object_name = "itinerary"
+
+    def get_queryset(self):
+        return Itinerary.objects.published()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["related_destinations"] = self.object.published_destinations()  # FR-05
+        return context
