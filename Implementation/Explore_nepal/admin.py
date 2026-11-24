@@ -13,7 +13,8 @@ class ItineraryAdmin(admin.ModelAdmin):
     filter_horizontal = ("destinations",)
     readonly_fields = ("created_at", "updated_at", "created_by", "updated_by")
     actions = ["publish_selected", "unpublish_selected", "archive_selected"]
- def save_model(self, request, obj, form, change):
+
+    def save_model(self, request, obj, form, change):
         # FR-29: remember WHICH admin created / changed the record
         if not change:
             obj.created_by = request.user
@@ -46,5 +47,3 @@ class ItineraryAdmin(admin.ModelAdmin):
     def archive_selected(self, request, queryset):
         n = queryset.update(status=Itinerary.Status.ARCHIVED, updated_by=request.user)
         self.message_user(request, f"{n} itinerary(ies) archived.", messages.SUCCESS)
-
-   
