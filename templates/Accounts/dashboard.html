@@ -1,1 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Admin dashboard | Explore Nepal{% endblock %}
 
+{% block content %}
+<main>
+  <h1>Admin dashboard</h1>
+  <p>Signed in as <strong>{{ request.user.get_username }}</strong>.</p>
+
+  <h2>Manage</h2>
+  <ul>
+    <li><a href="/admin/destinations/destination/">Destinations</a></li>
+    <li><a href="/admin/itineraries/itinerary/">Itineraries</a></li>
+    <li><a href="/admin/inquiries/inquiry/">Inquiries</a></li>
+  </ul>
+
+  <h2>Itineraries by status</h2>
+  <ul>
+    {% for label, number in itinerary_counts %}<li>{{ label }}: {{ number }}</li>{% endfor %}
+  </ul>
+
+  {# Django 5: logout must be a POST request #}
+  <form method="post" action="{% url 'accounts:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Sign out</button>
+  </form>
+</main>
+{% endblock %}
