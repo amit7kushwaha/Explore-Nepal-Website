@@ -1,1 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Itineraries &amp; Travel Guides | Explore Nepal{% endblock %}
 
+{% block content %}
+<main>
+  <h1>Itineraries &amp; Travel Guides</h1>
+  {% include "itineraries/_disclaimer.html" %}
+
+  {% if itineraries %}
+    <ul class="card-list">
+      {% for item in itineraries %}
+        <li class="card">
+          <h2><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h2>
+          {% if item.duration_days %}<p>Duration: {{ item.duration_days }} day{{ item.duration_days|pluralize }}</p>{% endif %}
+          {% if item.summary %}<p>{{ item.summary }}</p>{% endif %}
+          <a href="{{ item.get_absolute_url }}">View itinerary</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+      <nav aria-label="Pagination">
+        {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p>No itineraries are available yet. Please check back soon.</p>
+  {% endif %}
+</main>
+{% endblock %}
