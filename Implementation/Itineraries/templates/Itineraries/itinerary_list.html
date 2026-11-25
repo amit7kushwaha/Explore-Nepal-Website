@@ -1,12 +1,19 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Explore Nepal - Itineraries</title>
+  <meta charset="UTF-8" />
+  <title>Itineraries - Explore Nepal</title>
 </head>
 <body>
-  <h1>Explore Nepal: Travel Itineraries</h1>
-  <p>Sample preview page for travel itineraries and day-by-day planning.</p>
-  <p>Notice: Itineraries are provided for informational planning purposes only; live booking and guaranteed pricing are not provided here.</p>
+  <h1>Explore Nepal Itineraries</h1>
+  {% for item in itineraries %}
+    <div>
+      <h2>{{ item.title }}</h2>
+      <p>{{ item.destination }} - {{ item.duration_days }} Days ({{ item.difficulty }})</p>
+      <p>{{ item.summary }}</p>
+    </div>
+  {% empty %}
+    <p>No itineraries available yet.</p>
+  {% endfor %}
 </body>
 </html>

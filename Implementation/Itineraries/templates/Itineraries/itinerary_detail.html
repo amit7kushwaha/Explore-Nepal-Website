@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ itinerary.title }} - Explore Nepal</title>
+</head>
+<body>
+  <h1>{{ itinerary.title }}</h1>
+  <p>{{ itinerary.destination }} - {{ itinerary.duration_days }} Days ({{ itinerary.difficulty }})</p>
+  <p>{{ itinerary.summary }}</p>
+  <h2>Day-by-Day Plan</h2>
+  {% for day in itinerary.days.all %}
+    <div>
+      <h3>Day {{ day.day_number }}: {{ day.heading }}</h3>
+      <p>{{ day.description }}</p>
+      {% if day.overnight_stay %}
+        <p>Overnight: {{ day.overnight_stay }}</p>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p>No day details added yet.</p>
+  {% endfor %}
+</body>
+</html>
