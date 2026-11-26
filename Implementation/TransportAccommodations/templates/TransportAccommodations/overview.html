@@ -1,50 +1,35 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transportation &amp; Accommodations - Explore Nepal</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2rem auto; max-width: 960px; padding: 0 1rem; color: #222; }
-        h1, h2 { color: #1b4332; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .card { border: 1px solid #d8e2dc; border-radius: 8px; padding: 1rem; background: #f8faf9; }
-        .badge { display: inline-block; background: #2d6a4f; color: #fff; font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
-        .meta { color: #555; font-size: 0.9rem; margin: 0.4rem 0; }
-    </style>
-</head>
-<body>
-    <h1>Transportation &amp; Accommodations</h1>
+﻿{% extends "TransportAccommodations/base.html" %}
+{% block content %}
+<h1>Transportation &amp; Accommodations</h1>
+<form method="get">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search...">
+    <select name="transport_type"><option value="">All Transport</option>{% for v, l in transport_types %}<option value="{{ v }}" {% if selected_transport_type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <select name="accommodation_type"><option value="">All Stays</option>{% for v, l in accommodation_types %}<option value="{{ v }}" {% if selected_accommodation_type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <button type="submit">Filter</button>
+    {% if query or selected_transport_type or selected_accommodation_type %}<a href="{% url 'transport_accommodations:overview' %}">Reset</a>{% endif %}
+</form>
 
-    <h2>Transportation Options</h2>
-    <div class="grid">
-        {% for item in transportations %}
-        <div class="card">
-            <span class="badge">{{ item.transport_type }}</span>
-            <h3>{{ item.route_name }}</h3>
-            <p class="meta"><strong>Route:</strong> {{ item.origin }} &rarr; {{ item.destination }}</p>
-            <p class="meta"><strong>Duration:</strong> {{ item.duration }} | <strong>Est. Cost:</strong> ${{ item.estimated_cost }}</p>
-            {% if item.schedule_notes %}<p>{{ item.schedule_notes }}</p>{% endif %}
-        </div>
-        {% empty %}
-        <p>No transportation routes available yet.</p>
-        {% endfor %}
+<h2>Transportation</h2>
+<div class="grid">
+    {% for item in transportations %}
+    <div class="card">
+        <span class="badge">{{ item.transport_type }}</span>
+        <h3>{{ item.route_name }}</h3>
+        <p>{{ item.origin }} &rarr; {{ item.destination }} ({{ item.duration }}) &bull; ${{ item.estimated_cost }}</p>
+        <a href="{% url 'transport_accommodations:transportation_detail' item.pk %}">Details &rarr;</a>
     </div>
+    {% empty %}<p>No transportation routes found.</p>{% endfor %}
+</div>
 
-    <h2>Accommodations</h2>
-    <div class="grid">
-        {% for stay in accommodations %}
-        <div class="card">
-            <span class="badge">{{ stay.accommodation_type }}</span>
-            <h3>{{ stay.name }}</h3>
-            <p class="meta"><strong>Location:</strong> {{ stay.location }}</p>
-            <p class="meta"><strong>Price:</strong> ${{ stay.price_per_night }} / night</p>
-            {% if stay.amenities %}<p><strong>Amenities:</strong> {{ stay.amenities }}</p>{% endif %}
-            {% if stay.contact_info %}<p class="meta"><strong>Contact:</strong> {{ stay.contact_info }}</p>{% endif %}
-        </div>
-        {% empty %}
-        <p>No accommodations listed yet.</p>
-        {% endfor %}
+<h2>Accommodations</h2>
+<div class="grid">
+    {% for stay in accommodations %}
+    <div class="card">
+        <span class="badge">{{ stay.accommodation_type }}</span>
+        <h3>{{ stay.name }}</h3>
+        <p>{{ stay.location }} &bull; ${{ stay.price_per_night }} / night</p>
+        <a href="{% url 'transport_accommodations:accommodation_detail' stay.pk %}">Details &rarr;</a>
     </div>
-</body>
-</html>
+    {% empty %}<p>No accommodations found.</p>{% endfor %}
+</div>
+{% endblock %}
