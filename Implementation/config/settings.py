@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "Itineraries.apps.ItinerariesConfig",
+    "TransportAccommodations.apps.TransportaccommodationsConfig",
 ]
 
 MIDDLEWARE = [
@@ -105,3 +106,4 @@ LOGGING = {
         "django.security": {"handlers": ["console"], "level": "WARNING", "propagate": False},
     },
 }
+
