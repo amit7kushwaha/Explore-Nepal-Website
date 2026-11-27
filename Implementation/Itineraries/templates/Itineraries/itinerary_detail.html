@@ -3,8 +3,8 @@
 {% block content %}
   <p><a href="{% url 'itineraries:itinerary_list' %}">&larr; Back to All Itineraries</a></p>
   <h1>{{ itinerary.title }}</h1>
-  <p><span class="badge">{{ itinerary.difficulty }}</span> &nbsp; {{ itinerary.destination }} &bull; {{ itinerary.duration_days }} Days</p>
-  <p>{{ itinerary.summary }}</p>
+  <p><span class="badge">{{ itinerary.difficulty }}</span> &nbsp; <strong>Region:</strong> {{ itinerary.destination }} &bull; <strong>Duration:</strong> {{ itinerary.duration_days }} Days</p>
+  {% if itinerary.summary %}<p><strong>Trip Highlights:</strong> {{ itinerary.summary }}</p>{% endif %}
 
   <h2>Day-by-Day Plan</h2>
   {% for day in itinerary.days.all %}

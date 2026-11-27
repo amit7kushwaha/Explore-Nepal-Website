@@ -5,8 +5,8 @@
   {% for item in itineraries %}
     <div class="card">
       <h2><a href="{% url 'itineraries:itinerary_detail' item.pk %}">{{ item.title }}</a></h2>
-      <p><span class="badge">{{ item.difficulty }}</span> &nbsp; {{ item.destination }} &bull; {{ item.duration_days }} Days</p>
-      <p>{{ item.summary }}</p>
+      <p><span class="badge">{{ item.difficulty }}</span> &nbsp; <strong>Region:</strong> {{ item.destination }} &bull; <strong>Duration:</strong> {{ item.duration_days }} Days</p>
+      {% if item.summary %}<p><strong>Trip Highlights:</strong> {{ item.summary }}</p>{% endif %}
       <a href="{% url 'itineraries:itinerary_detail' item.pk %}">View Day-by-Day Plan &rarr;</a>
     </div>
   {% empty %}
