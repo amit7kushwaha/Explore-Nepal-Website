@@ -1,0 +1,21 @@
+﻿{% extends "Itineraries/base.html" %}
+{% block title %}{{ itinerary.title }} - Explore Nepal{% endblock %}
+{% block content %}
+  <p><a href="{% url 'itineraries:itinerary_list' %}">&larr; Back to All Itineraries</a></p>
+  <h1>{{ itinerary.title }}</h1>
+  <p><span class="badge">{{ itinerary.difficulty }}</span> &nbsp; {{ itinerary.destination }} &bull; {{ itinerary.duration_days }} Days</p>
+  <p>{{ itinerary.summary }}</p>
+
+  <h2>Day-by-Day Plan</h2>
+  {% for day in itinerary.days.all %}
+    <div class="card">
+      <h3>Day {{ day.day_number }}: {{ day.heading }}</h3>
+      <p>{{ day.description }}</p>
+      {% if day.overnight_stay %}
+        <p><strong>Overnight Stay:</strong> {{ day.overnight_stay }}</p>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p>No day details added yet.</p>
+  {% endfor %}
+{% endblock %}
