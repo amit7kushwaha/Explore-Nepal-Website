@@ -1,0 +1,11 @@
+﻿{% extends "TransportAccommodations/base.html" %}
+{% block content %}
+<div class="card">
+    <span class="badge">{{ transportation.transport_type }}</span>
+    <h1>{{ transportation.route_name }}</h1>
+    <p><strong>Route:</strong> {{ transportation.origin }} &rarr; {{ transportation.destination }}</p>
+    <p><strong>Duration:</strong> {{ transportation.duration }} | <strong>Cost:</strong> ${{ transportation.estimated_cost }}</p>
+    {% if transportation.schedule_notes %}<p><strong>Notes:</strong> {{ transportation.schedule_notes }}</p>{% endif %}
+</div>
+<p><a href="{% url 'transport_accommodations:overview' %}">&larr; Back</a></p>
+{% endblock %}

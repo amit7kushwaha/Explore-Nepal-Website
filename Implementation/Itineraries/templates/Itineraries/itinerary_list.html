@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Itineraries - Explore Nepal</title>
+</head>
+<body>
+  <h1>Explore Nepal Itineraries</h1>
+  {% for item in itineraries %}
+    <div>
+      <h2>{{ item.title }}</h2>
+      <p>{{ item.destination }} - {{ item.duration_days }} Days ({{ item.difficulty }})</p>
+      <p>{{ item.summary }}</p>
+    </div>
+  {% empty %}
+    <p>No itineraries available yet.</p>
+  {% endfor %}
+</body>
+</html>

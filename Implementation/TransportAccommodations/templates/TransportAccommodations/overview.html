@@ -1,0 +1,35 @@
+﻿{% extends "TransportAccommodations/base.html" %}
+{% block content %}
+<h1>Transportation &amp; Accommodations</h1>
+<form method="get">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search...">
+    <select name="transport_type"><option value="">All Transport</option>{% for v, l in transport_types %}<option value="{{ v }}" {% if selected_transport_type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <select name="accommodation_type"><option value="">All Stays</option>{% for v, l in accommodation_types %}<option value="{{ v }}" {% if selected_accommodation_type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <button type="submit">Filter</button>
+    {% if query or selected_transport_type or selected_accommodation_type %}<a href="{% url 'transport_accommodations:overview' %}">Reset</a>{% endif %}
+</form>
+
+<h2>Transportation</h2>
+<div class="grid">
+    {% for item in transportations %}
+    <div class="card">
+        <span class="badge">{{ item.transport_type }}</span>
+        <h3>{{ item.route_name }}</h3>
+        <p>{{ item.origin }} &rarr; {{ item.destination }} ({{ item.duration }}) &bull; ${{ item.estimated_cost }}</p>
+        <a href="{% url 'transport_accommodations:transportation_detail' item.pk %}">Details &rarr;</a>
+    </div>
+    {% empty %}<p>No transportation routes found.</p>{% endfor %}
+</div>
+
+<h2>Accommodations</h2>
+<div class="grid">
+    {% for stay in accommodations %}
+    <div class="card">
+        <span class="badge">{{ stay.accommodation_type }}</span>
+        <h3>{{ stay.name }}</h3>
+        <p>{{ stay.location }} &bull; ${{ stay.price_per_night }} / night</p>
+        <a href="{% url 'transport_accommodations:accommodation_detail' stay.pk %}">Details &rarr;</a>
+    </div>
+    {% empty %}<p>No accommodations found.</p>{% endfor %}
+</div>
+{% endblock %}

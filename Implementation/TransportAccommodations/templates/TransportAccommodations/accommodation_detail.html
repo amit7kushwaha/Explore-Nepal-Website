@@ -1,0 +1,12 @@
+﻿{% extends "TransportAccommodations/base.html" %}
+{% block content %}
+<div class="card">
+    <span class="badge">{{ accommodation.accommodation_type }}</span>
+    <h1>{{ accommodation.name }}</h1>
+    <p><strong>Location:</strong> {{ accommodation.location }}</p>
+    <p><strong>Price:</strong> ${{ accommodation.price_per_night }} / night</p>
+    {% if accommodation.amenities %}<p><strong>Amenities:</strong> {{ accommodation.amenities }}</p>{% endif %}
+    {% if accommodation.contact_info %}<p><strong>Contact:</strong> {{ accommodation.contact_info }}</p>{% endif %}
+</div>
+<p><a href="{% url 'transport_accommodations:overview' %}">&larr; Back</a></p>
+{% endblock %}
