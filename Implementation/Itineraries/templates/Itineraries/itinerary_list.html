@@ -1,19 +1,15 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Itineraries - Explore Nepal</title>
-</head>
-<body>
+﻿{% extends "Itineraries/base.html" %}
+{% block title %}Itineraries - Explore Nepal{% endblock %}
+{% block content %}
   <h1>Explore Nepal Itineraries</h1>
   {% for item in itineraries %}
-    <div>
-      <h2>{{ item.title }}</h2>
-      <p>{{ item.destination }} - {{ item.duration_days }} Days ({{ item.difficulty }})</p>
+    <div class="card">
+      <h2><a href="{% url 'itineraries:itinerary_detail' item.pk %}">{{ item.title }}</a></h2>
+      <p><span class="badge">{{ item.difficulty }}</span> &nbsp; {{ item.destination }} &bull; {{ item.duration_days }} Days</p>
       <p>{{ item.summary }}</p>
+      <a href="{% url 'itineraries:itinerary_detail' item.pk %}">View Day-by-Day Plan &rarr;</a>
     </div>
   {% empty %}
     <p>No itineraries available yet.</p>
   {% endfor %}
-</body>
-</html>
+{% endblock %}
