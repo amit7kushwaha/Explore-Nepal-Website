@@ -22,12 +22,21 @@ class TransportAccommodationsTests(TestCase):
 
     def test_overview_and_filters(self):
         url = reverse("transport_accommodations:overview")
-        self.assertEqual(self.client.get(url).status_code, 200)
-        res = self.client.get(url, {"q": "Pokhara", "transport_type": "Flight"})
-        self.assertContains(res, "Kathmandu to Pokhara Flight")
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, 200)
+        self.assertContains(res, "subject to change")
+
+        filtered = self.client.get(url, {"q": "Pokhara", "transport_type": "Flight"})
+        self.assertContains(filtered, "Kathmandu to Pokhara Flight")
+
+        empty = self.client.get(url, {"q": "NonExistentPlaceXYZ"})
+        self.assertContains(empty, "No transportation routes found.")
+        self.assertContains(empty, "No accommodations found.")
 
     def test_detail_pages(self):
         t_url = reverse("transport_accommodations:transportation_detail", args=[self.flight.pk])
         a_url = reverse("transport_accommodations:accommodation_detail", args=[self.hotel.pk])
         self.assertEqual(self.client.get(t_url).status_code, 200)
         self.assertEqual(self.client.get(a_url).status_code, 200)
+        self.assertEqual(self.client.get(reverse("transport_accommodations:transportation_detail", args=[99999])).status_code, 404)
+        self.assertEqual(self.client.get(reverse("transport_accommodations:accommodation_detail", args=[99999])).status_code, 404)
